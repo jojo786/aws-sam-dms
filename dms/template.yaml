@@ -1,0 +1,91 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Document OCR via Textract and Rekognition
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+    Runtime: python3.8
+    Architectures:
+        - x86_64
+    ReservedConcurrentExecutions: 1
+
+
+Resources:
+  DocumentOCRFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: dms/
+      Handler: doc.lambda_handler
+      Environment:
+        Variables:
+          DocumentTable: !Ref DocumentTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DocumentTable 
+        - AWSLambdaExecute 
+        - RekognitionDetectOnlyPolicy: {}
+        - Statement:
+            - Effect: Allow
+              Action: s3:*
+              Resource: "arn:aws:s3:::dms-sam/*"
+      Events:
+        DocumentUpload:
+          Type: S3
+          Properties:
+            Bucket: 
+              Ref: DocumentBucket
+            Events: s3:ObjectCreated:*
+
+  DynamoDBFunction:
+    Type: AWS::Serverless::Function
+    Description: 'Lambda function inserts data into DynamoDB table'
+    Properties:
+      FunctionName: WeatherFunction
+      Handler: apigw2dynamo.lambda_handler
+      Runtime: python3.8
+      CodeUri: dms/
+      Environment:
+        Variables:
+          DocumentTable: !Ref DocumentTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DocumentTable
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+            Auth:
+              ApiKeyRequired: true
+
+            
+  DocumentBucket: 
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: dms-sam
+
+  DocumentTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions:
+        - AttributeName: dms_id
+          AttributeType: S
+        - AttributeName: document
+          AttributeType: S
+      KeySchema:
+        - AttributeName: dms_id
+          KeyType: HASH
+        - AttributeName: document
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+      TableName: DocumentOCR
+
+
+Outputs:
+  EndpointUrl:
+    Description: 'HTTP REST endpoint URL'
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod'
