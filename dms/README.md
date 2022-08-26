@@ -10,7 +10,7 @@ The idea is that you have an existing application where your users need to uploa
 
 
 # How to build and deploy
-- Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), and  [configure it](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config)
+- Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), and [configure it](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config)
 - Install [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 - Run `sam build`
 - Run `sam deploy --guided` the first time, which will guide to choose a stack name, region, etc. These options will be saved, so in subsequent runs after making changes, you only need to run `sam build && sam deploy`
@@ -31,4 +31,8 @@ Or you can directly query DynamoDB using the AWS CLI:
 `aws dynamodb get-item --table-name DocumentOCR  --key '{"dms": {"S":"DMS-34533452"}, "document":{"S": "id-pic.jpg"} }' `
 
 `aws dynamodb query --table-name DocumentOCR --key-condition-expression "dms = :name" --expression-attribute-values  '{":name":{"S":"DMS-34533452"}}'`
+
+# Debugging
+Once you have uploaded a file to S3, you can see the logs of the AWs Lambda function that runs by using the SAM CLI:
+`sam logs --stack-name dms2` where `dms` is the stack name you chose. Alternatively, use the [AWS Management Console](https://us-east-1.console.aws.amazon.com/console/home?region=us-east-1&skipRegion=true#), and go the [CloudWatch Logs](https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#logsV2:log-groups) to check the logs for the Lambda function.
 
