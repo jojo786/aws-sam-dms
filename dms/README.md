@@ -39,7 +39,7 @@ or
 # Debugging
 Once you have uploaded a file to S3, you can see the logs of the AWs Lambda function that runs by using the SAM CLI:
 
-`sam logs --stack-name dms2` 
+`sam logs --stack-name dms` 
 
 where `dms` is the stack name you chose. 
 
