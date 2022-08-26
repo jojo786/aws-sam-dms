@@ -17,12 +17,14 @@ The idea is that you have an existing application where your users need to uploa
 
 # How to run and interact with the DMS
 
-When uploading the document to S3, you can specifiy some metadata, which allows to link to to an ID in your application. E.g. you can use the AWS CLI to upload to S3
+When uploading the document to S3, you can specifiy some metadata, which allows to link to to an ID in your application. E.g. you can use the AWS CLI to upload to S3:
+
 `aws s3 cp id.jpg s3://dms-sam/id-pic.jpg --metadata '{"dms-id":"DMS-34533452"}'`
 
 or alternatively use the [S3 API](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 
 Then query the results of the analysis via an API call, which is secured using an API Key:
+
 `curl https://xyz.execute-api.us-east-1.amazonaws.com/Prod\?DMS-34533452 -H "x-api-key: abc123"`
 
 
