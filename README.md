@@ -1,8 +1,6 @@
 # aws-sam-dms
 Document Management System on AWS Serverless, deployed using AWS SAM
 
-# dms
-
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. The application is a starting point to build a serverless document management system (DMS). It allows you to upload files to Amazon S3, which then invokes a Lambda that does various analysis of the document, and stores the results of the analysis on Amazon DynamoDB. You can then query the results via an API exposed using Amazon API Gateway.
 The analysis can include:
 - doing facial analysis on pictures using Amazon Rekognition
