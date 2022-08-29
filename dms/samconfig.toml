@@ -2,10 +2,10 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "dms"
-s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-fhd6ali0eej3"
-s3_prefix = "dms"
-region = "us-east-1"
+stack_name = "dms2"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-2eb1ub1r41ba"
+s3_prefix = "dms2"
+region = "af-south-1"
 capabilities = "CAPABILITY_IAM"
 disable_rollback = true
 image_repositories = []
