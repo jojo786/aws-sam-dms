@@ -13,6 +13,7 @@ The idea is that you have an existing application where your users need to uploa
 # How to build and deploy
 - Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), and [configure it](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) for the region you going to use. If you later change the region, then ideally change the default region in the AWS CLI config, or alternatively you will need to append `--region af-south-1` all commands below, if you want to use the Africa Cape Town region, for example.
 - Install [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
+- Update the S3 bucket name in `template.yaml` by updating the `BucketName` variable to something of your choice. Amazon S3 supports global buckets, which means that each bucket name must be unique across all AWS accounts in all the AWS Regions.
 - Run `sam build`
 - Run `sam deploy --guided` the first time, which will guide to choose a stack name, region, etc. These options will be saved, so in subsequent runs after making changes, you only need to run `sam build && sam deploy`
 
