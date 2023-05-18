@@ -3,8 +3,6 @@
 
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. The application is a starting point to build a serverless document management system (DMS). It allows you to upload files to Amazon S3, which then invokes a Lambda that does various analysis of the document, and stores the results of the analysis on Amazon DynamoDB. You can then query the results via an API exposed using Amazon API Gateway.
 
-
-
 The analysis can include:
 - doing facial analysis on pictures using Amazon Rekognition
 - extracting text using Amazon Textract
@@ -12,6 +10,8 @@ The analysis can include:
 
 The idea is that you have an existing application where your users need to upload documents, e.g. ID or proof of residence documents. Its in-efficient and expensive to store and manage these documents locally in your application file system or relational database, and requires manual effort to verify their authenticity. Using this sample DMS application on AWS, you can store these documents safely and cheaply in AWS, and automate the verification and extraction of data.
 
+#Architecture
+[architecture](IAWS-IDP-DMS.png)
 
 # How to build and deploy
 - Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), and [configure it](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) for the region you going to use. If you later change the region, then ideally change the default region in the AWS CLI config, or alternatively you will need to append `--region af-south-1` all commands below, if you want to use the Africa Cape Town region, for example.
