@@ -11,6 +11,7 @@ The analysis can include:
 The idea is that you have an existing application where your users need to upload documents, e.g. ID or proof of residence documents. Its in-efficient and expensive to store and manage these documents locally in your application file system or relational database, and requires manual effort to verify their authenticity. Using this sample DMS application on AWS, you can store these documents safely and cheaply in AWS, and automate the verification and extraction of data.
 
 #Architecture
+
 ![architecture](AWS-IDP-DMS.drawio.png)
 
 
