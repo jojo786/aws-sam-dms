@@ -11,7 +11,7 @@ The analysis can include:
 The idea is that you have an existing application where your users need to upload documents, e.g. ID or proof of residence documents. Its in-efficient and expensive to store and manage these documents locally in your application file system or relational database, and requires manual effort to verify their authenticity. Using this sample DMS application on AWS, you can store these documents safely and cheaply in AWS, and automate the verification and extraction of data.
 
 #Architecture
-[architecture](AWS-IDP-DMS.png)
+![architecture](AWS-IDP-DMS.png)
 
 # How to build and deploy
 - Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), and [configure it](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) for the region you going to use. If you later change the region, then ideally change the default region in the AWS CLI config, or alternatively you will need to append `--region af-south-1` all commands below, if you want to use the Africa Cape Town region, for example.
