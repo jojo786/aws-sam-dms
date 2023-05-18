@@ -7,13 +7,15 @@ Globals:
   Function:
     Timeout: 20
     MemorySize: 128
-    Runtime: python3.8
+    Runtime: python3.9
     Architectures:
-    - x86_64
+    - arm64
     ReservedConcurrentExecutions: 1
 Resources:
   DocumentOCRFunction:
     Type: AWS::Serverless::Function
+    Description: Lambda function that is invoked via S3 upload Event, that sends documents
+      to Rekognition and saved Rekognition response into DynamoDB
     Properties:
       CodeUri: DocumentOCRFunction
       Handler: doc.lambda_handler
@@ -42,7 +44,8 @@ Resources:
       SamResourceId: DocumentOCRFunction
   DynamoDBFunction:
     Type: AWS::Serverless::Function
-    Description: Lambda function inserts data into DynamoDB table
+    Description: Lambda function that is invoked via APIGW, that requests document
+      data from DynamoDB table
     Properties:
       FunctionName: WeatherFunction
       Handler: apigw2dynamo.lambda_handler
@@ -69,7 +72,7 @@ Resources:
   DocumentBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: dms-sam
+      BucketName: idp-dms
   DocumentTable:
     Type: AWS::DynamoDB::Table
     Properties:
